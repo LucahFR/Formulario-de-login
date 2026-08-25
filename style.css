@@ -25,8 +25,8 @@ div.form-container {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    height: 250px;
+    width: min(100% - 32px, 520px);
+    min-height: 250px;
 }
 
 h1{
