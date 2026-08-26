@@ -78,3 +78,18 @@ input[type="file"] {
 option{
     text-align: center;
 }
+
+div.perfil-container {
+    background-color: #080808;
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: min(100% - 32px, 520px);
+    min-height: 350px;
+}
+
+p.perfil-imagem{
+    margin-left: 320px;
+    margin-top: -100px;
+}

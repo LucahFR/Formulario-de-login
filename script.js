@@ -52,4 +52,8 @@ function editarInformações(){
 window.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', login);
     button.addEventListener('click', adicionarInformações)
+    button.addEventListener('click', editarInformações)
+    button.addEventListener('click', registrar)
+    button.addEventListener('click', redirectToProfile)
+    button.addEventListener('click', loginValido)
 });
