@@ -8,16 +8,61 @@
 </head>
 <body>
     <div class="container">
-        <div class="form-container">
-            <h1>Formulário de Login</h1>
-            <form>
-                <label for="username">Nome de usuário:</label>
-                <input type="text" id="username" name="username" required>
-                <br><br>
+        <div class="formulario-container" hidden>
+        <h1>Formulário de Login</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
             <label for="password">Senha:</label>
             <input type="password" id="password" name="password" required>
             <br><br>
             <button type="submit">Entrar</button>
+        </form>
+    </div>
+    <div class="container" >
+        <div class="informações-container" >
+        <h1>Informações</h1>
+        <form>
+            <label for="nome"><strong>Nome:</strong></label>
+            <input type="text" id="nome" name="mome" required>
+            <br><br>
+            <label for="sobrenome"><strong>Sobrenome:</strong></label>
+            <input type="text" id="sobrenome" name="sobrenome" required>
+            <br><br>
+            <form action="/enviar" method="POST" enctype="multipart/form-data">
+                <label for="imagem" class="botao-customizado"><strong>Imagem de perfil</strong></label>
+                <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png">
+            </form>
+            <br>
+            <label for="endereço"><strong>Endereço:</strong></label>
+            <input type="text" id="endereço" name="endereço" required>
+            <br><br>
+            <label for="data"><strong>Data de nascimento:</strong></label>
+            <input type="date" name="data" id="data" required>
+            <br><br>
+            <label for="filhos"><strong>Possui filhos?</strong></label>
+            <select name="filhos" id="filhos">
+                <option value="não">não</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3+">3+</option>
+            </select>
+            <br><br>
+            <label for="esporte"><strong>Qual seu esporte favorito?</strong></label>
+            <br><br>
+            <p>Futebol <input type="radio" name="esporte" id="esporte"></p>
+            <p>Volei <input type="radio" name="esporte" id="esporte"></p> 
+            <p>Basquete <input type="radio" name="esporte" id="esporte"></p>
+            <p>Futebol <input type="radio" name="esporte" id="esporte"></p>
+            <label for="jogos"><strong>Quais seus jogos favoritos?</strong></label>
+            <br><br>
+            <p>Valorant <input type="checkbox" name="jogos" id="jogos"></p>
+            <p>CS:GO <input type="checkbox" name="jogos" id="jogos"></p>
+            <p>Minecraft <input type="checkbox" name="jogos" id="jogos"></p>
+            <p>Valorant <input type="checkbox" name="jogos" id="jogos"></p>
+            
+            <button type="submit" class="botao-confirmar">Confirmar</button>
         </form>
     </div>
 </body>
