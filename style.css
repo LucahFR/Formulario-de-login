@@ -19,14 +19,24 @@ div.container {
     height: 100vh;
 }
 
-div.form-container {
+div.informações-container{
+    background-color: #080808;
+    color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: min(520px, 520px);
+    min-height: 300px;
+}
+
+div.formulario-container {
     background-color: #080808;
     color: #fff;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: min(100% - 32px, 520px);
-    min-height: 250px;
+    min-height: 150px;
 }
 
 h1{
@@ -45,4 +55,26 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 180px;
+}
+
+button.botao-confirmar {
+    margin-top: 40px;
+    margin-left: 165px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.botao-customizado {
+  padding: 4px 10px;
+  background-color: #454546;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+option{
+    text-align: center;
 }
