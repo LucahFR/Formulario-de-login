@@ -1,10 +1,5 @@
 
-//usuários cadastrados
-const usuarios = [
-    { username: "user1", password: "1" },
-    { username: "user2", password: "2" },
-    { username: "user3", password: "3" }
-];
+//arrumar um jeito de quando o usuario cadastrar guardar as informações dele e quando ele logar, checar se tem informações dele, caso não, mandar para tela de adicionar informações, caso sim mandar para perfil
 
 //Elementos
 const formulario = document.querySelector("formulario");
@@ -14,6 +9,9 @@ const passwordInput = document.getElementById("password");
 //Funções
 function redirectToProfile() {
     window.location.href = "perfil.html";
+    window.location.replace("perfil.html");
+    window.location.assign("perfil.html");
+    window.location.reload("perfil.html");
 }
 
 function loginValido(username, password) {

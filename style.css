@@ -55,7 +55,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 180px;
+    font-size: 16px;
 }
 
 button.botao-confirmar {
@@ -92,4 +92,22 @@ div.perfil-container {
 p.perfil-imagem{
     margin-left: 320px;
     margin-top: -100px;
+}
+
+.botao-customizadov2, a {
+  padding: 4px 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.grupo-botao {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 5px;
+    margin-bottom: -20px;
 }
