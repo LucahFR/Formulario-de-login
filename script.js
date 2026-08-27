@@ -5,6 +5,10 @@
 const formulario = document.querySelector("formulario");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
+const botaoRegistrar = document.getElementById("registrar");
+const botaoEntrar = document.getElementById("entrar");
+const formularioRegistrar = document.getElementById("formulario-registrar");
+const formularioLogin = document.getElementById("formulario-login");
 
 //Funções
 function redirectToProfile() {
@@ -15,7 +19,13 @@ function redirectToProfile() {
 }
 
 function loginValido(username, password) {
-    return usuarios.some(usuario => usuario.username === username && usuario.password === password);
+    if (username === localStorage.getItem("username") && password === localStorage.getItem("password")) {
+        alert("Login bem-sucedido!");
+        return true;
+    } else {
+        alert("Nome de usuário ou senha incorretos.");
+        return false;
+    }
 }
 
 function login(){
@@ -24,9 +34,15 @@ function login(){
         alert("Por favor, preencha todos os campos.");
         return;
     }
+    const usernameDigitado = document.querySelector("#username").value;
+    const usernameSalvo = localStorage.getItem("username");
+    const senhaDigitada = document.querySelector("#password").value;
+    const senhaSalva = localStorage.getItem("password");
+
     if (!loginValido(usernameInput.value, passwordInput.value)) {
         redirectToProfile();
     }
+
 }
 
 function registrar(){
@@ -36,6 +52,16 @@ function registrar(){
         return;
     }
 
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    
+    //adicionar localstorage pra guardar as informações do usuario
+
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+
+    alert("Registro realizado com sucesso!");
+    formularioRegistrar.reset();
 }
 
 function adicionarInformações(){
@@ -54,4 +80,14 @@ window.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', registrar)
     button.addEventListener('click', redirectToProfile)
     button.addEventListener('click', loginValido)
+    formularioRegistrar.addEventListener('submit', (event) => {
+        event.preventDefault();
+        registrar();
+    
+    });
+
+    formularioLogin.addEventListener('submit', (event) => {
+        event.preventDefault();
+        login();
+    });
 });
