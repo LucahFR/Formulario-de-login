@@ -35,16 +35,17 @@ function login(event){
 
 function registrar(event){
     event.preventDefault();
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const passwordRepeatInput = document.getElementById("passwordRepeat").value;
 
-    if (usernameInput.value || passwordInput.value ) {
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const passwordRepeatInput = document.getElementById("passwordRepeat");
+
+    if (!usernameInput.value || !passwordInput.value || !passwordRepeatInput.value ) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
     
-    if (passwordRepeatInput && passwordInput.value !== passwordRepeatInput.value){
+    if (passwordInput.value !== passwordRepeatInput.value){
         alert("As senhas não são iguais!")
         return;
     }
