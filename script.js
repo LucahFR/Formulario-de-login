@@ -3,7 +3,7 @@
 // quando logar passar para perfil se tiver todas as informações ja preenchidas, se não mandar para informações
 // mudar a parte de foto para que seja possivel colocar uma foto e salvar ela no localStorage, e quando for para perfil mostrar a foto que foi salva no localStorage
 
-//Elementos
+// ELEMENTOS
 
 const formulario = document.querySelector("formulario");
 const botaoRegistrar = document.getElementById("registrar");
@@ -11,7 +11,7 @@ const botaoEntrar = document.getElementById("entrar");
 const formularioRegistrar = document.getElementById("formulario-registrar");
 const formularioLogin = document.getElementById("formulario-login");
 
-//Funções
+// FUNÇÕES
 
 function redirectTo(page) {
     window.location.href = page;
@@ -159,24 +159,87 @@ function salvarInformacoes(event) {
 // PERFIL
 
 function carregarPerfil(){
-    //refazer
+    const campos = [
+        "nome", "sobrenome", "endereco", "data", "filhos", "esporte", "jogos"
+    ];
+    campos.forEach(id => {
+        const elemento = document.getElementById(`perfil-${id}`);
+        if (elemento) {
+           elemento.textContent = getStorage(id, "Não informado");
+        }
+    });
+
+    // foto
+    const imgPerfil = document.getElementById("perfil-imagem");
+    const foto = getStorage("fotoPerfil", "");
+    if (imgPerfil) {
+        if (foto) {
+            imgPerfil.src = foto;
+            imgPerfil.alt = "Foto de perfil";
+            imgPerfil.style.display = "block";
+        } else {
+            imgPerfil.style.display = "none";
+        }
+    }
 }
 
-//DOMcontentLoaded + Eventos
+// DOMCONTENTLOADED + EVENTOS
 
 window.addEventListener('DOMContentLoaded', () => {
-    const formularioLogin = document.getElementById("formulario-login");
-    const formularioRegistrar = document.getElementById("formulario-registrar");
-
-    if (formularioLogin) {
-        formularioLogin.addEventListener('submit', login);
+    const pagina = window.location.pathname.split("/").pop();
+    
+    if (pagina === "index.html" || pagina === "") {
+        const formLogin = document.getElementById("formulario-login");
+        if (formLogin) {
+            formLogin.addEventListener("submit", login);
+        }
     }
 
-    if (formularioRegistrar) {
-        formularioRegistrar.addEventListener('submit', registrar);
+    if (pagina === "registrar.html") {
+        const formRegistrar = document.getElementById("formulario-registrar");
+        if (formRegistrar) {
+            formRegistrar.addEventListener("submit", registrar);
+        }
     }
 
-    if (window.location.pathname.endsWith("perfil.html")) {
+    if (pagina === "informações.html") {
+        const formInfo = document.getElementById("formulario-informacoes");
+        if (formInfo) {
+            if (getStorage("infoCompleta") === "true") {
+                carregarInformacoesParaEdicao();
+            }
+            formInfo.addEventListener("submit", salvarInformacoes);
+        }
+        
+        const fileInput = document.getElementById("imagem");
+        const preview = document.getElementById("preview-foto");
+        if (fileInput && preview) {
+            fileInput.addEventListener("change", function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = "block";
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
+    }
+
+    if (pagina === "perfil.html") {
+        if (getStorage("infoCompleta") !== "true") {
+            alert("Você ainda não preencheu seus dados. Por favor, complete suas informações.");
+            redirectTo("informações.html");
+            return;
+        }
         carregarPerfil();
+
+        const botaoEditar = document.getElementById("editar-perfil");
+        if (botaoEditar) {
+            botaoEditar.addEventListener("click", () => {
+                redirectTo("informações.html");
+            });
+        }
     }
 });
