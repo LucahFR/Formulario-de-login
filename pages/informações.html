@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+</head>
+<body>
+    <div class="container" >
+        <div class="informações-container" hidden>
+        <h1>Informações</h1>
+        <form id="infoForm">
+            <label for="nome"><strong>Nome:</strong></label>
+            <input type="text" id="nome" name="nome" required>
+            <br><br>
+            <label for="sobrenome"><strong>Sobrenome:</strong></label>
+            <input type="text" id="sobrenome" name="sobrenome" required>
+            <br><br>
+            <form action="/enviar" method="POST" enctype="multipart/form-data">
+                <label for="imagem" class="botao-customizado"><strong>Imagem de perfil</strong></label>
+                <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png">
+            </form>
+            <br>
+            <label for="endereço"><strong>Endereço:</strong></label>
+            <input type="text" id="endereço" name="endereço" required>
+            <br><br>
+            <label for="data"><strong>Data de nascimento:</strong></label>
+            <input type="date" name="data" id="data" required>
+            <br><br>
+            <label for="filhos"><strong>Possui filhos?</strong></label>
+            <select name="filhos" id="filhos" required>
+                <option value="não">NÃO</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3+">3+</option>
+            </select>
+            <br><br>
+            <label for="esporte"><strong>Qual seu esporte favorito?</strong></label>
+            <br><br>
+            <p>Futebol <input type="radio" name="esporte" id="esporte"></p>
+            <p>Volei <input type="radio" name="esporte" id="esporte"></p> 
+            <p>Basquete <input type="radio" name="esporte" id="esporte"></p>
+            <p>Futebol Americano <input type="radio" name="esporte" id="esporte"></p>
+            <label for="jogos"><strong>Quais seus jogos favoritos?</strong></label>
+            <br><br>
+            <p>Valorant <input type="checkbox" name="jogos" id="jogos"></p>
+            <p>CS:GO <input type="checkbox" name="jogos" id="jogos"></p>
+            <p>Minecraft <input type="checkbox" name="jogos" id="jogos"></p>
+            <p>Fortnite <input type="checkbox" name="jogos" id="jogos"></p>
+            <button type="submit" class="botao-confirmar">Confirmar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
