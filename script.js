@@ -81,7 +81,7 @@ function registrar(event){
     setStorage("password", passwordInput.value);
 
     alert("Registro realizado com sucesso!");
-    redirectTo("index.html");
+    redirectTo("login.html");
 }
 
 // INFORMAÇÕES
@@ -188,7 +188,7 @@ function carregarPerfil(){
 window.addEventListener('DOMContentLoaded', () => {
     const pagina = window.location.pathname.split("/").pop();
     
-    if (pagina === "index.html" || pagina === "") {
+    if (pagina === "login.html" || pagina === "") {
         const formLogin = document.getElementById("formulario-login");
         if (formLogin) {
             formLogin.addEventListener("submit", login);
