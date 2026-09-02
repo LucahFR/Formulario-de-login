@@ -1,7 +1,7 @@
 
 // quando registrar guardar as informações do registro no localStorage e mandar para login
 // quando logar passar para perfil se tiver todas as informações ja preenchidas, se não mandar para informações
-// mudar a parte de foto para que seja possivel colocar uma foto e salvar ela no localStorage, e quando for para perfil mostrar a foto que foi salva no localStorage
+// mudar a parte de foto para que seja possivel colocar uma foto e salvar ela no localStorage, quando for para perfil mostrar a foto que foi salva no localStorage
 
 // ELEMENTOS
 
@@ -48,10 +48,10 @@ function login(event){
 
     if (loginValido(usernameInput.value, passwordInput.value)) {
         alert(`Seja bem vindo ${usernameInput.value}!`)
-        if (infoCompleta) {
-            redirectTo("perfil.html")
+        if (getStorage("infoCompleta") === "true") {
+            redirectTo("perfil.html");
         } else {
-            redirectTo("informações.html")
+            redirectTo("informacoes.html")
         }
     } else {
         alert("Nome de usuário ou senha estão incorretos.")
@@ -86,28 +86,31 @@ function registrar(event){
 
 // INFORMAÇÕES
 
+const camposTextoInfo = ["nome", "sobrenome", "endereco", "data"];
+
 function carregarInformacoesParaEdicao() {
-    
-    const campos = [
-        "nome", "sobrenome", "endereco", "data", "filhos", "esporte", "jogos"
-    ];
-    campos.forEach(id => {
+    camposTextoInfo.forEach(id => {
         const elemento = document.getElementById(id);
         if (elemento) {
-            const valor = getStorage(id, "");
-            if (elemento.type === "radio" || elemento.type === "checkbox") {
-                const elementos = document.getElementsByName(id);
-                elementos.forEach(item => {
-                    if (item.value === valor) {
-                        item.checked = true;
-                    }
-                });
-            } else {
-                elemento.value = valor;
-            }
+            elemento.value = getStorage(id, "");
         }
     });
-
+ 
+    const filhosSelect = document.getElementById("filhos");
+    if (filhosSelect) {
+        filhosSelect.value = getStorage("filhos", "não");
+    }
+ 
+    const esporteSalvo = getStorage("esporte", "");
+    document.getElementsByName("esporte").forEach(item => {
+        item.checked = item.value === esporteSalvo;
+    });
+ 
+    const jogosSalvos = getStorage("jogos", "").split(",").map(s => s.trim()).filter(Boolean);
+    document.getElementsByName("jogos").forEach(item => {
+        item.checked = jogosSalvos.includes(item.value);
+    });
+ 
     const imgBase64 = getStorage("fotoPerfil", "");
     const preview = document.getElementById("preview-foto");
     if (preview && imgBase64) {
@@ -115,6 +118,7 @@ function carregarInformacoesParaEdicao() {
         preview.style.display = "block";
     }
 }
+ 
 
 function salvarInformacoes(event) {
     event.preventDefault();
@@ -125,11 +129,10 @@ function salvarInformacoes(event) {
     const data = document.getElementById("data").value.trim();
     const filhos = document.querySelector('input[name="filhos"]:checked')?.value || "";
     const esporte = document.querySelector('input[name="esporte"]:checked')?.value || "";
-    const esporteSelecionado = document.querySelector('input[name="esporte"]:checked');
-    const jogos = document.querySelector('input[name="jogos"]:checked')?.value || "";
-    const jogosCheckboxes = document.querySelectorAll('input[name="jogos"]:checked');
-
-    if (!nome || !sobrenome || !endereco || !data || !filhos || !esporte || !jogos) {
+    const jogosSelecionados = Array.from(document.querySelectorAll('input[name="jogos"]:checked')).map(el => el.value);
+    const jogos = jogosSelecionados.join(", ");
+ 
+    if (!nome || !sobrenome || !endereco || !data || !filhos || !esporte || jogosSelecionados.length === 0) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
@@ -202,7 +205,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (pagina === "informações.html") {
+    if (pagina === "informacoes.html") {
         const formInfo = document.getElementById("formulario-informacoes");
         if (formInfo) {
             if (getStorage("infoCompleta") === "true") {
@@ -230,7 +233,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (pagina === "perfil.html") {
         if (getStorage("infoCompleta") !== "true") {
             alert("Você ainda não preencheu seus dados. Por favor, complete suas informações.");
-            redirectTo("informações.html");
+            redirectTo("informacoes.html");
             return;
         }
         carregarPerfil();
@@ -238,7 +241,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const botaoEditar = document.getElementById("editar-perfil");
         if (botaoEditar) {
             botaoEditar.addEventListener("click", () => {
-                redirectTo("informações.html");
+                redirectTo("informacoes.html");
             });
         }
     }
