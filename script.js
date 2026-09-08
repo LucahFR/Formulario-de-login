@@ -148,7 +148,7 @@ function carregarInformacoesParaEdicao() {
  
     const jogosSalvos = getStorage("jogos", []);
     document.getElementsByName("jogos").forEach(item => {
-    item.checked = jogosSalvos.includes(item.value);
+        item.checked = jogosSalvos.includes(item.value);
     });
  
     const imgBase64 = getStorage("fotoPerfil", "");
